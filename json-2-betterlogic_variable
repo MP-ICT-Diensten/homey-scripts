@@ -1,0 +1,35 @@
+//
+//  Source of script: https://community.athom.com/t/mqtt-flow-parse-json/20531
+//
+// converting information in json to betterlogic variable using HomeyScript App on a Homey
+//
+// HomeyScript app:  https://homey.app/nl-nl/app/com.athom.homeyscript/HomeyScript/
+//
+
+if (args[0] == undefined) {
+    console.log ('Missing argument');
+    return false;
+}
+
+let bl = await Homey.apps.getApp({ id: 'net.i-dev.betterlogic' } );
+if (!bl) {
+    console.error('Better Logic not installed!');
+    return false;
+}
+
+obj = JSON.parse(args[0]);
+
+_.forEach(obj, async function(value, key) {
+    try {
+        let blObj = await bl.apiGet(key);
+        if (blObj) {
+            console.log('Updating variable: ' + key + '/' + value)
+            bl.apiPut(key + '/' + value)
+        }
+    }
+    catch(err) {
+        console.log("Couldn't find variable")
+    }
+});
+
+return true
