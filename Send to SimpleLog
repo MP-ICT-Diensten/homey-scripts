@@ -1,0 +1,2 @@
+fixed it let HomeyScript = await Homey.apps.getApp({ id: 'nl.nielsdeklerk.log' } );
+HomeyScript.apiPut('addlog' , { log:'log_content', group: 'group_name'} );
