@@ -1,0 +1,10 @@
+// Playground web API
+//
+// How Many Apps are running
+//
+Homey.apps.getApps().then((data,err) => {
+if (err)
+  return err
+var test = Object.entries(data).filter((function(app) {  return app[1].enabled; }));
+return test.length;
+})
