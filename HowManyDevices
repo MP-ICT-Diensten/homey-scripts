@@ -1,0 +1,12 @@
+// Playground web API
+//
+// How Many Devices are connected
+//
+
+Homey.devices.getDevices().then((data,err) => {
+if (err)
+  return err
+var test = Object.keys(data)
+return test.length;
+})
+
