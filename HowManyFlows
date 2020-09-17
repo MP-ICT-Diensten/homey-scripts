@@ -1,0 +1,10 @@
+// Playground web API
+//
+// How Many Flows are running
+//
+Homey.flow.getFlows().then((data,err) => {
+if (err)
+  return err
+var test = Object.entries(data).filter((function(flow) {  return flow[1].enabled; }));
+return test.length;
+})
